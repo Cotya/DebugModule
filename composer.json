@@ -1,0 +1,19 @@
+{
+  "name": "cotya/module-debug",
+  "description": "Magento Module to improve the output of exceptions",
+  "require": {
+    "php": "~5.5.0|~5.6.0",
+    "magento/framework": "~0.42.0",
+    "magento/magento-composer-installer": "*"
+  },
+  "minimum-stability": "beta",
+  "type": "magento2-module",
+  "extra": {
+    "map": [
+      [
+        "*",
+        "Cotya/Debug"
+      ]
+    ]
+  }
+}

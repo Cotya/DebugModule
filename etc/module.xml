@@ -4,9 +4,6 @@
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd"
         >
     <module name="Cotya_Debug" schema_version="0.1.0.0" >
-        <sequence>
-            
-        </sequence>
     </module>
     
 </config>

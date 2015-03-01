@@ -8,4 +8,16 @@
     <type name="Magento\Framework\App\Http">
         <plugin name="Cotya_Debug_Plugin_Http" type="Cotya\Debug\Plugin\Http"/>
     </type>
+    <type name="Cotya\Debug\Model\Suggestions">
+        <arguments>
+            <argument name="classes" xsi:type="array">
+                <item name="Cotya_IntervalNotFound" xsi:type="string">
+                    Cotya\Debug\Model\Suggestion\IntervalNotFound</item>
+                <item name="Cotya_ClassDoesNotExist" xsi:type="string">
+                    Cotya\Debug\Model\Suggestion\ClassDoesNotExist</item>
+                <item name="Cotya_BadMethodCall_MissingRequired" xsi:type="string">
+                    Cotya\Debug\Model\Suggestion\BadMethodCall\MissingRequired</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

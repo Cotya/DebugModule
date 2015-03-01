@@ -1,42 +1,22 @@
 <?php
 /**
- *
- *
- *
- *
  */
 
-namespace Cotya\Debug\Traits;
+namespace Cotya\Debug\Model\Suggestion;
 
 use Cotya\Debug\Model\Result;
+use Cotya\Debug\Model\SuggestionInterface;
 
-trait Handler
+class IntervalNotFound implements SuggestionInterface
 {
 
-
-    /**
-     * @param \Exception $exception
-     *
-     * @return Result
-     */
-    protected function processException(\Exception $exception)
+    public function match(\Exception $exception)
     {
-        $result = new Result();
-        $result->setException($exception);
-        if (strpos($exception->getMessage(), 'Interval not found by config') === 0) {
-            $this->processIntervalNotFoundByConfig($result);
-        }
-        
-        return $result;
+        return (strpos($exception->getMessage(), 'Interval not found by config') === 0);
     }
 
-    protected function processIntervalNotFoundByConfig(Result $result)
+    public function process(Result $result)
     {
-        $result->addDocumentationReference('there is no official documentation directly related to this,
-         please help extending it by contributing to https://github.com/magento/devdocs');
-        
-
-        
         $trace = $result->getException()->getTrace();
         if ($trace[0]['class'] == 'Magento\Framework\Search\Dynamic\IntervalFactory') {
             $missedIntervalName = str_replace(
@@ -53,8 +33,8 @@ trait Handler
             $codeExample = <<<XML
 <type name="Magento\Framework\Search\Dynamic\IntervalFactory">
     <arguments>
-        <!-- 
-        this usually is of type "const" with a reference to a php constant, 
+        <!--
+        this usually is of type "const" with a reference to a php constant,
         but we cant resolve this automagically yet
         -->
         <argument name="configPath" xsi:type="string">{$trace[0]['args'][2]}</argument>
@@ -66,13 +46,12 @@ trait Handler
 </type>
 XML;
             $codeExample = htmlspecialchars($codeExample);
-            $result->setSuggestedSolution("you are missing an Interval definition for one of your classes.
+            $result->addSuggestedSolution("you are missing an Interval definition for one of your classes.
 You need to extend your module di.xml to solve this. The needed code should look similar to this:
 <pre style='border: 1px dotted;padding:5px;'>
 $codeExample
 </pre>
             ");
         }
-        //var_dump($trace[0]['args']);
     }
 }
