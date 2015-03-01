@@ -35,11 +35,23 @@ class Http
         $response = new Response();
         $response->setHttpResponseCode(500);
         $response->setHeader('Content-Type', 'text/html');
+        
+        
+        $documentationReferenceHtml = '';
+        foreach ($result->getDocumentationReferences() as $reference) {
+            $documentationReferenceHtml .= "<li>$reference</li>";
+        }
+        $documentationReferenceHtml = "<ul>$documentationReferenceHtml</ul>";
+        
         $html = "<html>
         <head></head>
         <body>
         <h2>optimized Exception Display</h2>
-        <span>{$result->getException()->getMessage()}</span>
+        <h3>{$result->getException()->getMessage()}</h3>
+        $documentationReferenceHtml
+        <h4>suggested solution:</h4>
+        <div>{$result->getSuggestedSolution()}</div>
+        <h4>Exception trace:</h4>
         <pre>{$result->getException()->getTraceAsString()}</pre>
         </body></html>";
         $response->setBody($html);
