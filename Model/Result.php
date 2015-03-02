@@ -13,9 +13,9 @@ class Result
 
     protected $exception;
     protected $documentationReferences = [];
-    protected $suggestedSolution = '';
+    protected $suggestedSolutions = [];
     
-    public function setException(\Exception $exception)
+    public function __construct(\Exception $exception)
     {
         $this->exception = $exception;
     }
@@ -38,13 +38,13 @@ class Result
         return $this->documentationReferences;
     }
     
-    public function setSuggestedSolution($solution)
+    public function addSuggestedSolution($solution)
     {
-        $this->suggestedSolution = $solution;
+        $this->suggestedSolutions[] = $solution;
     }
     
-    public function getSuggestedSolution()
+    public function getSuggestedSolutions()
     {
-        return $this->suggestedSolution;
+        return $this->suggestedSolutions;
     }
 }
