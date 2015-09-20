@@ -5,6 +5,7 @@
   "require": {
     "php": "~5.5.0|~5.6.0",
     "magento/framework": "~0.42.0",
+    "symfony/web-profiler-bundle": "~2.7",
     "magento/magento-composer-installer": "*"
   },
   "minimum-stability": "beta",

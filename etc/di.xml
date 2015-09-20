@@ -20,4 +20,20 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Twig_LoaderInterface" type="Cotya\Debug\Lib\TwigLoader" />
+    <type name="Twig_Environment" shared="false">
+        <arguments>
+            <argument name="loader" xsi:type="object" shared="false">Cotya\Debug\Lib\TwigLoader</argument>
+        </arguments>
+    </type>
+    <type name="Cotya\Debug\Lib\AbstractTwigBlock" shared="false">
+        <arguments>
+            <argument name="twig" xsi:type="object" shared="false">Twig_Environment</argument>
+        </arguments>
+    </type>
+    <type name="Cotya\Debug\Block\TwigTest" shared="false">
+        <arguments>
+            <argument name="twig" xsi:type="object" shared="false">Twig_Environment</argument>
+        </arguments>
+    </type>
 </config>
