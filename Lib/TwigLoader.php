@@ -24,6 +24,31 @@ class TwigLoader implements \Twig_LoaderInterface
     public function getSource($name)
     {
         $source = null;
+
+
+        if (strpos($name, '@WebProfiler') === 0) {
+            $path = str_replace(
+                '@WebProfiler',
+                BP . '/../vendor/symfony/web-profiler-bundle/Resources/views',
+                $name
+            );
+            $source = file_get_contents($path);
+            /*
+            array('config',    '@WebProfiler/Collector/config.html.twig'),
+            array('request',   '@WebProfiler/Collector/request.html.twig'),
+            array('exception', '@WebProfiler/Collector/exception.html.twig'),
+            array('events',    '@WebProfiler/Collector/events.html.twig'),
+            array('logger',    '@WebProfiler/Collector/logger.html.twig'),
+            array('time',      '@WebProfiler/Collector/time.html.twig'),
+            array('router',    '@WebProfiler/Collector/router.html.twig'),
+            array('memory',    '@WebProfiler/Collector/memory.html.twig'),
+            array('form',      '@WebProfiler/Collector/form.html.twig'),
+            $templates[] = array('twig', '@WebProfiler/Collector/twig.html.twig');
+            $templates[] = array('dump', '@Debug/Profiler/dump.html.twig');
+             */
+        }
+
+
         if ($name === 'TwigTest')
         {
             $source = <<<TWIG
